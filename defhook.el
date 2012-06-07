@@ -4,17 +4,17 @@
 ;; Maintainer: Neil Smithline
 ;; Copyright (C) 2012, Neil Smithline, all rights reserved.
 ;; Created: Sun May 27 09:24:41 2012 (-0400)
-;; Version: 1.0-pre1
-;; Last-Updated: 
-;;           By: 
-;;     Update #: 0
-;; URL: 
+;; Version: 1.0-pre2
+;; Last-Updated: Wed May 30 19:52:57 2012 (-0400)
+;;           By: Neil Smithline
+;;     Update #: 1
+;; URL: https://github.com/Neil-Smithline/defhook
 ;; Keywords: elisp, utility, modes
 ;; Compatibility: Universal
 ;; 
 ;; Features that might be required by this library:
 ;;
-;;   custom
+;;   custom, assert-rtn
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 
@@ -109,11 +109,10 @@
 ;;           
 ;;          FYI: "ngs" are my initials.
 ;; 
-;; 
-;; 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 
 ;;; Change Log:
+;;  Wed May 30 19:52:57 2012 (-0400): Added commentary.
 ;; 
 ;; 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -136,6 +135,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 
 ;;; Code:
+
+(require 'assert-rtn)
 
 (defgroup defhook nil "Define mode hooks wherever you want." 
   :link '(function-link defhook))
@@ -574,14 +575,10 @@ use within the generated function. Using `window-scroll-function'
 as an example, the :HOOK-ARGS keyword should be
 \":HOOK-ARGS (window new-display-start)\".
 
+*** THIS OPTION MAY BE REMOVED OR MODIFIED IN FUTURE VERSIONS ***
 :VALIDATE-HOOK-NAME - Default value t. When non-nil, some
 rudimentary checks are performed to see if the HOOK-SYM appears
-to be a valid hook and generate an error if it is invalid. Even
-when validating is enabled, many invalid HOOK-SYMs will be
-accepted. The :VALIDATE-HOOK-NAME keyword should typically be
-left as its default value. The only reason for changing it to nil
-is if you are dealing with a hook that has an atypical name such
-as `hook-for-foo' instead of the standard `foo-hook'."
+to be a valid hook and generate an error if it is invalid."
   
   (declare (doc-string 3))
   (assert (not (null defhook-user-prefix)) t)
